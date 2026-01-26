@@ -6,10 +6,12 @@ import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
 
 import Dashboard from "./pages/customers/Dashboard";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <div className="bg-primary min-h-screen w-full">
+    <div className="bg-primary h-screen w-full">
+      <Toaster/>
       <BrowserRouter>
         <Routes>
           {/* Auth Routes */}
