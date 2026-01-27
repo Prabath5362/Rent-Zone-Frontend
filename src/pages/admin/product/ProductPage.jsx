@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Plus, Search, Edit, Trash } from "lucide-react";
+import axios from "axios";
+import { ServerConstant } from "../../../utils/ServerConstant";
+import toast from "react-hot-toast";
 
 function ProductPage() {
+
+  const [product,setProduct] = useState([]);
+  const [state,setState] = useState("");
+
+  const fetchProduct =async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if(!token){
+        toast("Please login first", {type:"error"});
+        return;
+      }
+      
+      const response = await axios.get(ServerConstant.baseUrl+ServerConstant.admin.product.get,{
+        headers: {
+          Authorization: "Bearer "+ token
+        }
+      });
+
+      setProduct(response.data.products);
+
+    } catch (error) {
+      console.log(error.response?.data?.message || "Error fetching products");
+      toast("Something went wrong", {type:"error"});
+    }
+  }
+
+  useEffect(()=>{
+    fetchProduct();
+  },[]);
+
   return (
     <div className="p-6 w-full">
       

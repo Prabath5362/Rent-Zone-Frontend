@@ -6,10 +6,15 @@ import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
 
 import Dashboard from "./pages/customers/Dashboard";
+import { Toaster } from "react-hot-toast";
+import AdminRoutehandler from "./services/AdminRoutehandler";
+import USerRouteHandler from "./services/USerRouteHandler";
+import UnauthorizedPage from "./pages/Unauthorized";
 
 function App() {
   return (
-    <div className="bg-primary min-h-screen w-full">
+    <div className="bg-primary h-screen w-full">
+      <Toaster/>
       <BrowserRouter>
         <Routes>
           {/* Auth Routes */}
@@ -17,10 +22,19 @@ function App() {
           <Route path="/register" element={<SignUp />} />
 
           {/* Admin Routes */}
-          <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route element={<AdminRoutehandler/>}>
+            <Route path="/admin/*" element={<AdminDashboard />} />
+          </Route>
 
           {/* User Routes */}
-          <Route path="/*" element={<Dashboard />} />
+          <Route element={<USerRouteHandler/>}>
+            <Route path="/*" element={<Dashboard />} />
+          </Route>
+
+
+
+          {/* Unauthorized */}
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
         </Routes>
       </BrowserRouter>
     </div>
