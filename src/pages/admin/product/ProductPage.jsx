@@ -3,13 +3,18 @@ import { Plus, Search, Edit, Trash } from "lucide-react";
 import axios from "axios";
 import { ServerConstant } from "../../../utils/ServerConstant";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { BounceLoader } from "react-spinners";
+import ErrorPage from "../ErrorPage";
 
 function ProductPage() {
 
   const [product,setProduct] = useState([]);
-  const [state,setState] = useState("");
+  const [state,setState] = useState("loading");
+  const navigate = useNavigate();
 
   const fetchProduct =async () => {
+    setState("loading");
     try {
       const token = localStorage.getItem("token");
       if(!token){
@@ -24,10 +29,12 @@ function ProductPage() {
       });
 
       setProduct(response.data.products);
-
+      setState("success");
+      
     } catch (error) {
       console.log(error.response?.data?.message || "Error fetching products");
       toast("Something went wrong", {type:"error"});
+      setState("error");
     }
   }
 
@@ -38,7 +45,16 @@ function ProductPage() {
   return (
     <div className="p-6 w-full">
       
-      {/* Header */}
+      {
+        state == "loading" ? 
+          <div className="fixed bg-black/50 w-full h-full left-0 top-0 flex items-center justify-center">
+              <BounceLoader color="#FF204E"/>
+          </div> :  
+        
+        state == "error" ? <ErrorPage/> :
+          
+          <>
+          {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
           <h1 className="text-3xl font-semibold text-gray-800">Products</h1>
@@ -47,7 +63,11 @@ function ProductPage() {
           </p>
         </div>
 
-        <button className="mt-4 md:mt-0 flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-md hover:opacity-90 transition">
+        <button onClick={
+          ()=>{
+            navigate("/admin/product/add");
+          }
+        } className="mt-4 md:mt-0 flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-md hover:opacity-90 transition">
           <Plus size={18} />
           Add Product
         </button>
@@ -73,6 +93,7 @@ function ProductPage() {
       </div>
 
       {/* Products Table */}
+      
       <div className="bg-white shadow rounded-lg overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
@@ -81,39 +102,22 @@ function ProductPage() {
               <th className="p-4">Category</th>
               <th className="p-4">Stock</th>
               <th className="p-4">Price / Day</th>
+              <th className="p-4">Image</th>
               <th className="p-4 text-center">Actions</th>
             </tr>
           </thead>
 
+          
           <tbody>
-            {[
-              {
-                name: "Drill Machine",
-                category: "Electrical",
-                stock: 12,
-                price: "$15",
-              },
-              {
-                name: "Hammer",
-                category: "Carpenter",
-                stock: 25,
-                price: "$5",
-              },
-              {
-                name: "Cement Mixer",
-                category: "Masonry",
-                stock: 3,
-                price: "$40",
-              },
-            ].map((item, index) => (
+            {product.map((item, index) => (
               <tr
                 key={index}
-                className="border-b hover:bg-gray-50 transition"
+                className="border-b border-gray-400 hover:bg-gray-50 transition"
               >
                 <td className="p-4 font-medium text-gray-800">
                   {item.name}
                 </td>
-                <td className="p-4 text-gray-600">{item.category}</td>
+                <td className="p-4 text-gray-600">{item.categories}</td>
                 <td className="p-4">
                   <span
                     className={`px-3 py-1 rounded-full text-sm ${
@@ -128,6 +132,9 @@ function ProductPage() {
                 <td className="p-4 font-semibold text-gray-800">
                   {item.price}
                 </td>
+                <td className="p-4">
+                  <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-md" />
+                </td>
                 <td className="p-4 flex items-center justify-center gap-3">
                   <button className="text-blue-600 hover:text-blue-800">
                     <Edit size={18} />
@@ -140,7 +147,9 @@ function ProductPage() {
             ))}
           </tbody>
         </table>
-      </div>
+      </div></>
+      }
+      
     </div>
   );
 }

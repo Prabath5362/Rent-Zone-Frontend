@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo3.png";
+import { Link } from "react-router-dom";
 
 function AdminNavBar() {
   return (
@@ -16,16 +17,16 @@ function AdminNavBar() {
       {/* Navigation */}
       <ul className="flex items-center gap-4  font-medium text-lg">
         <li className="cursor-pointer hover:text-white transition">
-          Home
+          <Link to={"/admin"}>Home</Link>
         </li>
         <li className="cursor-pointer hover:text-white transition">
-          Products
+          <Link to={"/admin/product"}>Products</Link>
         </li>
         <li className="cursor-pointer hover:text-white transition">
-          Orders
+          <Link to={"/admin/order"}>Orders</Link>
         </li>
         <li className="cursor-pointer hover:text-white transition">
-          Users
+          <Link to={"/admin/user"}>Users</Link>
         </li>
       </ul>
 
