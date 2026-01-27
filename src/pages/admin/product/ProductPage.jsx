@@ -38,6 +38,25 @@ function ProductPage() {
     }
   }
 
+
+  const handleDelete = async(productKey)=> {
+    try {
+      setState("loading");
+      const response = await axios.delete(ServerConstant.baseUrl+ServerConstant.admin.product.delete+`/${productKey}`, {
+        headers: {
+          Authorization: "Bearer "+ localStorage.getItem("token")
+        }
+      });
+      toast("Product deleted successfully", {type:"success"});
+      fetchProduct();
+      setState("success");
+    } catch (error) {
+      toast("Something went wrong", {type:"error"});
+      console.log(error.response?.data?.message || "Error deleting product");
+      setState("error");
+    }
+  }
+
   useEffect(()=>{
     fetchProduct();
   },[]);
@@ -136,10 +155,14 @@ function ProductPage() {
                   <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-md" />
                 </td>
                 <td className="p-4 flex items-center justify-center gap-3">
-                  <button className="text-blue-600 hover:text-blue-800">
+                  <button onClick={()=>{
+                    navigate("/admin/product/update", {state: item});
+                  }} className="text-blue-600 hover:text-blue-800">
                     <Edit size={18} />
                   </button>
-                  <button className="text-red-600 hover:text-red-800">
+                  <button onClick={()=> {
+                    handleDelete(item.productKey)
+                  }} className="text-red-600 hover:text-red-800">
                     <Trash size={18} />
                   </button>
                 </td>
