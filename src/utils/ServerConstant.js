@@ -9,7 +9,8 @@ export const ServerConstant = {
         product: {
             get: "/product/get",
             add: "/product/add",
-            update: "/product/update"
+            update: "/product/update",
+            delete: "/product/delete"
         },
 
     }
