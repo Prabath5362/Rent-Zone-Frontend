@@ -11,6 +11,7 @@ import CustomersPage from "./customer/CustomersPage";
 import NotFoundPage from "./NotFoundPage";
 import AddProductPage from "./product/AddProductPage";
 import UpdateProductPage from "./product/UpdateProductPage";
+import UpdateOrder from "./order/UpdateOrder";
 
 function AdminDashboard() {
   return (
@@ -18,12 +19,21 @@ function AdminDashboard() {
       <AdminNavBar />
 
       <div className="min-h-[calc(100vh-80px)] w-full ">
+
+
           <Routes>
           <Route path="/" element={<AdminHomePage />} />
+
+
           <Route path="/product" element={<ProductPage />} />
           <Route path="/product/add" element={<AddProductPage />} />
           <Route path="/product/update" element={<UpdateProductPage />} />
+
+
           <Route path="/order" element={<OrdersPage />} />
+          <Route path="/order/update"element={<UpdateOrder />} />
+        
+        
           <Route path="/customer" element={<CustomersPage />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
