@@ -13,5 +13,12 @@ export const ServerConstant = {
             delete: "/product/delete"
         },
 
+        order : {
+            get: "/booking/getBookings",
+            update: "/booking/updateBooking",
+            updateBookingStatus: "/booking/updateBookingStatus",
+            delete: "/booking/deleteBooking"
+        }
+
     }
 };

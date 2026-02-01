@@ -17,6 +17,10 @@ console.log("token is"+ token);
     return <Navigate to={"/unauthorized"} />
   }
 
+  if(userdata.role === "admin"){
+    return <Navigate to={"/admin"} />
+  }
+
   return <Outlet/>
 }
 
