@@ -27,7 +27,6 @@ function UpdateOrder() {
   const bookingDateRef = useRef();
   const rentalCostRef = useRef();
 
-
   const handleUpdate = async () => {
     const updateData = {
       id: idRef.current.value,
@@ -81,8 +80,7 @@ function UpdateOrder() {
   };
 
   const formatDate = (date) => {
-    console.log("Date : "+ date);
-    
+    console.log("Date : " + date);
   };
 
   return (
@@ -118,7 +116,7 @@ function UpdateOrder() {
               Customer Email
             </label>
             <input
-            ref={emailRef}
+              ref={emailRef}
               type="email"
               defaultValue={order.email}
               className="w-full border rounded-md px-4 py-2"
@@ -204,10 +202,6 @@ function UpdateOrder() {
             />
           </div>
 
-         
-
-        
-
           {/* Status */}
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -225,7 +219,7 @@ function UpdateOrder() {
           </div>
 
           {/* Images */}
-          <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="md:col-span-2 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <p className="text-sm text-gray-600 mb-1">Profile</p>
               <img src={order.profilePic} className="rounded-md" />
