@@ -18,7 +18,14 @@ export const ServerConstant = {
             update: "/booking/updateBooking",
             updateBookingStatus: "/booking/updateBookingStatus",
             delete: "/booking/deleteBooking"
+        },
+
+        customer: {
+            get: "/user/getAllUsers",
+            update: "/user/updateUser",
+            delete: "/user/deleteUser"
         }
+
 
     }
 };

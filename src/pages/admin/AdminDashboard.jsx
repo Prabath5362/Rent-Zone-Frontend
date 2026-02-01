@@ -12,6 +12,7 @@ import NotFoundPage from "./NotFoundPage";
 import AddProductPage from "./product/AddProductPage";
 import UpdateProductPage from "./product/UpdateProductPage";
 import UpdateOrder from "./order/UpdateOrder";
+import UpdateCustomer from "./customer/UpdateCustomer";
 
 function AdminDashboard() {
   return (
@@ -35,6 +36,8 @@ function AdminDashboard() {
         
         
           <Route path="/customer" element={<CustomersPage />} />
+          <Route path="/customer/update" element={<UpdateCustomer />} />
+
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </div>

@@ -123,6 +123,9 @@ function UpdateProductPage() {
     }
   }
 
+
+
+
   return (
     <div className=" min-h-full p-6 w-full">
       
@@ -253,9 +256,10 @@ function UpdateProductPage() {
               <p className="text-gray-500 text-sm">
                 Click to upload or drag & drop
               </p>
-              <input type="file" className="hidden" onChange={(e)=> handleImageSelect(e)} />
-              </>
-            }
+               </>
+            } 
+            <input type="file" className="hidden" onChange={(e)=> handleImageSelect(e)} />
+            
 
               
             </label>

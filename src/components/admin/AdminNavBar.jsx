@@ -26,7 +26,7 @@ function AdminNavBar() {
           <Link to={"/admin/order"}>Orders</Link>
         </li>
         <li className="cursor-pointer hover:text-white transition">
-          <Link to={"/admin/user"}>Users</Link>
+          <Link to={"/admin/customer"}>Users</Link>
         </li>
       </ul>
 
