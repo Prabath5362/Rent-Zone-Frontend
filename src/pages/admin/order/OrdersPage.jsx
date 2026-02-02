@@ -7,6 +7,7 @@ import ErrorPage from "../ErrorPage";
 import { BounceLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 
+
 function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [state, setState] = useState("loading");
@@ -58,6 +59,35 @@ function OrdersPage() {
       toast.error("Error updating delivery status");
     }
   };
+
+  const handleDelete = async(bookingId)=> {
+    setState("loading");
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Please login to continue");
+        setState("");
+        return;
+      }
+      const response = await axios.delete(
+        ServerConstant.baseUrl + ServerConstant.admin.order.delete+"/"+bookingId,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+  
+        }
+      );
+      console.log();
+      
+      toast.success(response.data.message || "Order deleted ");
+      await fetchOrders();
+      setState("success");
+    } catch (error) {
+      setState("error");
+      toast.error("Failed to delete order");
+      console.error("Error deleting order:", error.message);
+    }
+  }
+
 
   /* ================= UI STATES ================= */
   if (state === "loading") {
@@ -164,7 +194,7 @@ function OrdersPage() {
                     >
                       <Edit size={18} />
                     </button>
-                    <button className="text-red-600 hover:text-red-800">
+                    <button onClick={()=> handleDelete(order.id)} className="text-red-600 hover:text-red-800">
                       <Trash size={18} />
                     </button>
                   </td>
@@ -238,7 +268,7 @@ function OrdersPage() {
               >
                 <Edit size={16} />
               </button>
-              <button className="p-2 rounded-lg bg-red-100 text-red-600">
+              <button onClick={()=>handleDelete(order.id)} className="p-2 rounded-lg bg-red-100 text-red-600">
                 <Trash size={16} />
               </button>
             </div>
