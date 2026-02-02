@@ -24,6 +24,10 @@ export const ServerConstant = {
             get: "/user/getAllUsers",
             update: "/user/updateUser",
             delete: "/user/deleteUser"
+        },
+
+        dasboard: {
+            get: "/dashboard/getDashboardDetails"
         }
 
 
