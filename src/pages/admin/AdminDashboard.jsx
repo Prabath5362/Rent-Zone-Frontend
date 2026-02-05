@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import AdminNavBar from "../../components/admin/AdminNavBar";
 import AdminHomePage from "./HomePage";
 import { Routes, Route } from "react-router-dom";
@@ -13,37 +13,39 @@ import AddProductPage from "./product/AddProductPage";
 import UpdateProductPage from "./product/UpdateProductPage";
 import UpdateOrder from "./order/UpdateOrder";
 import UpdateCustomer from "./customer/UpdateCustomer";
+import AdminSidebar from "../../components/admin/AdminSidebar";
+
+export const sidebarContext = createContext();
 
 function AdminDashboard() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
-    <div className="min-h-screen w-full">
-      <AdminNavBar />
+    <sidebarContext.Provider value={{ isSidebarOpen, setIsSidebarOpen }}>
+      <div className="min-h-screen w-full">
+        <AdminNavBar />
 
-      <div className="min-h-[calc(100vh-80px)] w-full ">
-
+        <div className="min-h-[calc(100vh-80px)] w-full ">
+          <AdminSidebar />
 
           <Routes>
-          <Route path="/" element={<AdminHomePage />} />
+            <Route path="/" element={<AdminHomePage />} />
 
+            <Route path="/product" element={<ProductPage />} />
+            <Route path="/product/add" element={<AddProductPage />} />
+            <Route path="/product/update" element={<UpdateProductPage />} />
 
-          <Route path="/product" element={<ProductPage />} />
-          <Route path="/product/add" element={<AddProductPage />} />
-          <Route path="/product/update" element={<UpdateProductPage />} />
+            <Route path="/order" element={<OrdersPage />} />
+            <Route path="/order/update" element={<UpdateOrder />} />
 
+            <Route path="/customer" element={<CustomersPage />} />
+            <Route path="/customer/update" element={<UpdateCustomer />} />
 
-          <Route path="/order" element={<OrdersPage />} />
-          <Route path="/order/update"element={<UpdateOrder />} />
-        
-        
-          <Route path="/customer" element={<CustomersPage />} />
-          <Route path="/customer/update" element={<UpdateCustomer />} />
-
-          <Route path="/*" element={<NotFoundPage />} />
-        </Routes>
+            <Route path="/*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
       </div>
-        
-      
-    </div>
+    </sidebarContext.Provider>
   );
 }
 
