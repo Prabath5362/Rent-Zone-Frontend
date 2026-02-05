@@ -26,6 +26,12 @@ export const ServerConstant = {
             delete: "/user/deleteUser"
         },
 
+        category : {
+            get: "/category/get",
+            add: "/category/add",
+            delete: "/category/delete"
+        },
+
         dasboard: {
             get: "/dashboard/getDashboardDetails"
         }
