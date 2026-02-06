@@ -1,0 +1,6 @@
+/* media query for 734 min width  */
+@media (max-width: 734px) {
+  .customer-nav {
+    display: none !important;
+  }
+}

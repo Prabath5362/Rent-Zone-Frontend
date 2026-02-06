@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import notFoundImage from "../../assets/images/notfound.png";
 
-function NotFoundPage() {
+function ErrorPage() {
   const navigate = useNavigate();
 
   return (
     <div className="h-full w-full flex items-center justify-center ">
-      <div className="bg-white shadow-lg rounded-xl px-10 py-8 flex flex-col items-center max-w-lg w-full">
+      <div className="bg-white shadow-lg rounded-xl px-10 pb-8 flex flex-col items-center max-w-lg w-full">
         
         <img
           src={notFoundImage}
@@ -24,7 +24,9 @@ function NotFoundPage() {
         </p>
 
         <button
-          onClick={() => navigate("/admin")}
+          onClick={() => {
+            window.location.reload();
+          }}
           className="mt-6 bg-accent text-white px-12 py-2 rounded-md hover:opacity-90 transition"
         >
           Go Back
@@ -34,4 +36,4 @@ function NotFoundPage() {
   );
 }
 
-export default NotFoundPage;
+export default ErrorPage;
