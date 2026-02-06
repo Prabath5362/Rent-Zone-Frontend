@@ -37,5 +37,31 @@ export const ServerConstant = {
         }
 
 
+    },
+
+
+    customer: {
+        category : {
+            get: "/category/get",
+            add: "/category/add",
+            delete: "/category/delete"
+        },
+
+        product: {
+            get: "/product/get",
+            getFeaturedProducts: "/product/getFeaturedProducts",
+        },
+
+
+        booking: {
+            add: "/booking/addBooking",
+            get: "/booking/getBookingByEmail",
+
+        },
+
+        user: {
+            get: "/user/getUserDetails",
+            put: "/user/updateUser"
+        }
     }
 };

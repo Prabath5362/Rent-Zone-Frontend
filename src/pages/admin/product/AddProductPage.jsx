@@ -148,7 +148,7 @@ function AddProductPage() {
       setFetchedCategories(response.data.categories);
       setCategoryState("success");
     } catch (error) {
-      setCategoryState;
+      setCategoryState("error");
       toast("Something went wrong", { type: "error" });
       console.log(error.response?.data?.message || "Error fetching categories");
     }
