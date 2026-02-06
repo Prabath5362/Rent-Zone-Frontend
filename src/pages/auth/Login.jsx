@@ -3,7 +3,7 @@ import bgImage from "../../assets/images/background.png";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ServerConstant } from "../../utils/ServerConstant";
-import { data, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { BounceLoader } from "react-spinners";
 
@@ -144,9 +144,9 @@ function Login() {
         {/* Footer */}
         <p className="text-center text-sm text-gray-300 mt-6">
           Don’t have an account?{" "}
-          <a href="#" className="">
+          <Link to="/register" className="text-accent hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

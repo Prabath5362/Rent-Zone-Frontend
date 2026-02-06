@@ -90,7 +90,7 @@ function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-primary)]">
+    <div className="min-h-screen bg-primary">
       {/* Hero Section */}
       <section
         className="relative py-16 px-6 text-center bg-cover bg-center"
@@ -104,7 +104,9 @@ function HomePage() {
           <p className="text-gray-200 max-w-xl mx-auto mb-6">
             Shop the latest products with amazing deals and fast delivery.
           </p>
-          <button className="bg-[var(--color-accent)] text-white px-8 py-3 rounded-full text-lg hover:opacity-90 transition">
+          <button onClick={()=>{
+            navigate("/product")
+          }} className="bg-[var(--color-accent)] text-white px-8 py-3 rounded-full text-lg hover:opacity-90 transition">
             Shop Now
           </button>
         </div>
@@ -215,16 +217,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-6 px-6 text-center">
-        <p>© 2026 RentZone. All rights reserved.</p>
-        <button
-          onClick={handleLogout}
-          className="mt-3 text-sm text-red-400 hover:underline"
-        >
-          Logout
-        </button>
-      </footer>
+      
     </div>
   );
 }
